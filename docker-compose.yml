@@ -44,8 +44,8 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=db
-      - PMA_USER=phper
-      - PMA_PASSWORD=secret
+      - PMA_USER=orkney092
+      - PMA_PASSWORD=r80921980o
     links:
       - db
     ports:

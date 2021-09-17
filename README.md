@@ -93,6 +93,12 @@ SPA認証機能により、利用者が操作する打刻画面、管理者が�
 </ul>
 </details>
 
+## ３．導入手順
+docker-compose up -d --build
+docker-compose exec app bash
+composer install
+php artisan migrate --seed
+chmod 777 -R storage/
 ## ３．作成者情報
 
 - 作成者：小国 亮介

@@ -20,6 +20,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/* && \
   docker-php-ext-install intl pdo_mysql zip bcmath
 
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
+RUN install-php-extensions gd
+
 # ローカルのphp設定ファイルを、インストールされたphpにコピー
 COPY ./php.ini /usr/local/etc/php/php.ini
 
