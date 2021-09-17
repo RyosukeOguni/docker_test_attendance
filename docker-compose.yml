@@ -1,0 +1,59 @@
+# Docker Composeファイルのバージョンを指定
+version: "3.9"
+
+# コンテナを設定
+services:
+  # 以下、インデントが区切りとして意味を持つので注意！
+
+  # phpを動作させるappサービスを設定
+  app:
+    # 動作させるDockerfileの置かれたビルドコンテキストを指定
+    build: ./infra/php
+    #　backendのlaravelをappサービスのworkにマウント
+    # backendをworkと紐づける事でphpが効くようにする
+    volumes:
+      - ./backend:/work
+
+  # WEBサーバーを動作させるサービス（Nginx）を設定
+  web:
+    # Dockerfileを使わず設定はすべて以下に記載する
+    image: nginx:1.20-alpine
+    # Nginxの80番（http）を、ローカルの8080番に繋ぐ
+    ports:
+      - 8080:80
+    volumes:
+      #　Laravelを作業ディレクトリに紐づけ
+      - ./backend:/work
+      # Nginxのdefault.confを用意したdefault.confで置き換え
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    # 作業ディレクトリをworkに設定
+    working_dir: /work
+
+  # MySQLを動作させるサービスを設定
+  db:
+    build: ./infra/mysql
+    # データベースのデータを永続化ボリュームに紐づけて、コンテナ停止後もデータを残す
+    volumes:
+      - db-store:/var/lib/mysql
+
+  # phpmyadminを動作させるサービスを設定
+  phpmyadmin:
+    # Dockerfileを使わず設定はすべて以下に記載する
+    image: phpmyadmin/phpmyadmin
+    #　環境変数でDBのパスワードを表示
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=phper
+      - PMA_PASSWORD=secret
+    links:
+      - db
+    ports:
+      - 8081:80
+    volumes:
+      - /sessions
+
+# 全てのサービス(コンテナ)が参照出来るトップレベルにボリュームを設定
+volumes:
+  #　名前付き永続化ボリュームなのでコンテナをstopしてもコンテナから紐づけられたデータを残る
+  db-store:
