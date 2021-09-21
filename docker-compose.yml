@@ -6,7 +6,7 @@ services:
   # 以下、インデントが区切りとして意味を持つので注意！
 
   # phpを動作させるappサービスを設定
-  app:
+  backend:
     # 動作させるDockerfileの置かれたビルドコンテキストを指定
     build: ./infra/php
     #　backendのlaravelをappサービスのworkにマウント
@@ -17,13 +17,15 @@ services:
   # WEBサーバーを動作させるサービス（Nginx）を設定
   web:
     # Dockerfileを使わず設定はすべて以下に記載する
-    image: nginx:1.20-alpine
+    image: nginx:latest
     # Nginxの80番（http）を、ローカルの8080番に繋ぐ
     ports:
       - 8080:80
+      - 8081:81
     volumes:
       #　Laravelを作業ディレクトリに紐づけ
       - ./backend:/work
+      - ./frontend:/work/frontend
       # Nginxのdefault.confを用意したdefault.confで置き換え
       - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
     # 作業ディレクトリをworkに設定
@@ -49,7 +51,7 @@ services:
     links:
       - db
     ports:
-      - 8081:80
+      - 8082:80
     volumes:
       - /sessions
 
