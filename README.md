@@ -15,126 +15,129 @@ SPA認証機能により、利用者が操作する打刻画面、管理者が�
 
 ## ２．使用パッケージ・ライブラリ
 
+
+
 <details>
 <summary><b>バックエンド（Laravel）</b></summary>
-<ul>
-  <li>
-    <dl>
-      <dt><a href="https://packagist.org/packages/laravel/framework">laravel/framework v8.55.0</a></dt>
-      <dd>laravelフレームワーク</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt><a href="https://packagist.org/packages/laravel/sanctum">laravel/sanctum v2.11.2</a></dt>
-      <dd>SPA認証に使用</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt><a href="https://packagist.org/packages/nesbot/carbon">nesbot/carbon　2.51.1</a></dt>
-      <dd>PHPサーバー内で日付や時間を処理</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt><a href="https://packagist.org/packages/phpoffice/phpspreadsheet">phpoffice/phpspreadsheet 1.18.0</a></dt>
-      <dd>出欠記録をExcelファイルに出力</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt><a href="https://packagist.org/packages/madnest/madzipper">madnest/madzipper v1.1.0</a></dt>
-      <dd>複数のExcelファイルをZip圧縮</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt><a href="https://packagist.org/packages/mnabialek/laravel-sql-logger">mnabialek/laravel-sql-logger 2.2.8</a></dt>
-      <dd>クエリログを記録</dd>
-    </dl>
-  </li>
-</ul>
+<br>
+
+- [laravel/framework v8.55.0](https://packagist.org/packages/laravel/framework)
+  - laravelフレームワーク
+- [laravel/sanctum v2.11.2](https://packagist.org/packages/laravel/sanctum)
+  - SPA認証に使用
+- [nesbot/carbon　2.51.1](https://packagist.org/packages/nesbot/carbon)
+  - PHPサーバー内で日付や時間を処理
+- [phpoffice/phpspreadsheet 1.18.0](https://packagist.org/packages/phpoffice/phpspreadsheet)
+  - 出欠記録をExcelファイルに出力
+- [madnest/madzipper v1.1.0](https://packagist.org/packages/madnest/madzipper)
+  - 複数のExcelファイルをZip圧縮
+- [mnabialek/laravel-sql-logger 2.2.8](https://packagist.org/packages/mnabialek/laravel-sql-logger)
+  - クエリログを記録
+___
 </details>
 
 <details>
-<summary><b>フロントエンドエンド（Vue.js）</b></summary>
-<ul>
-<li>
-  <dl>
-    <dt><a href="https://www.npmjs.com/package/vue">vue@2.6.14</a></dt>
-    <dd>Vue.jsフレームワーク</dd>
-  </dl>
-</li>
-<li>
-  <dl>
-    <dt><a href="https://www.npmjs.com/package/vue-router">vue-router@3.5.2</a></dt>
-    <dd>シングルページアプリケーション機能の導入</dd>
-  </dl>
-</li>
-<li>
-  <dl>
-    <dt><a href="https://www.npmjs.com/package/vuex">vuex@3.6.2</a></dt>
-    <dd>リアクティブデータの状態管理</dd>
-  </dl>
-</li>
-<li>
-  <dl>
-    <dt><a href="https://www.npmjs.com/package/axios">axios@0.21.1</a></dt>
-    <dd>非同期通信</dd>
-  </dl>
-</li>
-<li>
-  <dl>
-    <dt><a href="https://www.npmjs.com/package/vuetify">vuetify@2.5.8</a></dt>
-    <dd>UIフレームワーク</dd>
-  </dl>
-</li>
-</ul>
+<summary><b>フロントエンド（Vue.js）</b></summary>
+<br>
+
+- [vue@2.6.14](https://www.npmjs.com/package/vue)
+  - Vue.jsフレームワーク
+- [vue-router@3.5.2](https://www.npmjs.com/package/vue-router)
+  - シングルページアプリケーション機能の導入
+- [vuex@3.6.2](https://www.npmjs.com/package/vuex)
+  - リアクティブデータの状態管理
+- [axios@0.21.1](https://www.npmjs.com/package/axios)
+  - 非同期通信
+- [vuetify@2.5.8](https://www.npmjs.com/package/vuetify)
+  - UIフレームワーク
+___
 </details>
 
-## ３．導入手順
+## ３．Docker環境構築
+#### 必要環境
+- docker
+- docker-compose
+#### Docker構成
+| コンテナ名 | image | URL |
+----|----|----
+| backend | php:8.0-fpm-buster | [http://localhost:8080/](http://localhost:8080/) |
+| frontend | node:latest | [http://localhost:8081/](http://localhost:8081/) |
+| phpmyadmin | phpmyadmin/phpmyadmin | [http://localhost:8082/](http://localhost:8082/) |
+| web | nginx:latest ||
+| db | mysql/mysql-server:8.0 ||
 
-docker-composeの起動
+#### システム導入手順
+<details>
+<summary><b>システムDLとDockerコンテナの起動</b></summary>
+<br>
+
+１.Git hubからシステムをダウンロード
+```
+git clone https://github.com/RyosukeOguni/attendance_systemgit
+```
+２.ディレクトリを移動
+```
+cd attendance_system
+```
+３.docker-composeの起動
 ```
 docker-compose up -d --build
 ```
-backendコンテナへアクセス
+___
+</details>
+
+<details>
+<summary><b>バックエンド（Laravel）の設定</b></summary>
+<br>
+
+１.backendコンテナへアクセス
 ```
 docker-compose exec backend bash
 ```
-composerをインストール
+２.composerをインストール
 ```
 composer install
 ```
-アプリケーションキーを設定
+３.環境変数ファイルをコピーしてリネーム
+```
+cp backend/.env.example backend/.env
+```
+４.アプリケーションキーを設定
 ```
 php artisan key:generate
 ```
-laravel.logを記録するディレクトリに書込権限を付与
+５.laravel.logを記録するディレクトリに書込権限を付与
 ```
 chmod 777 -R storage/
 ```
-マイグレーションを実行
+６.マイグレーションを実行
 ```
 php artisan migrate --seed
 ```
-frontendコンテナへアクセス
+___
+</details>
+
+<details>
+<summary><b>フロントエンド（Vue.js）の設定</b></summary>
+
+１.frontendコンテナへアクセス
 ```
 docker-compose exec frontend bash
 ```
-npmをインストール
+２.npmをインストール
 ```
 npm install
 ```
-buildしてdistを作成
+３.環境変数ファイルをコピーしてリネーム
+```
+cp frontend/.env.production frontend/.env.local
+```
+４.buildしてdistを作成
 ```
 npm run dev-build
 ```
-
-- [backend_API：http://localhost:8080/](http://localhost:8080/)
-- [frontend_SPA：http://localhost:8081/](http://localhost:8081/)
-- [phpmyadmin：http://localhost:8082/](http://localhost:8082/)
+___
+</details>
 
 ## ４．作成者情報
 
