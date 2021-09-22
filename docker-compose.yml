@@ -5,7 +5,7 @@ version: "3.9"
 services:
   # 以下、インデントが区切りとして意味を持つので注意！
 
-  # phpを動作させるappサービスを設定
+  # phpを動作させるbackendサービスを設定
   backend:
     # 動作させるDockerfileの置かれたビルドコンテキストを指定
     build: ./infra/php
@@ -13,6 +13,12 @@ services:
     # backendをworkと紐づける事でphpが効くようにする
     volumes:
       - ./backend:/work
+
+  # nodeを動作させるfrontendサービスを設定
+  frontend:
+    image: node:latest
+    volumes:
+      - ./frontend:/work
 
   # WEBサーバーを動作させるサービス（Nginx）を設定
   web:
