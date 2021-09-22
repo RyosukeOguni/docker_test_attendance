@@ -17,8 +17,13 @@ services:
   # nodeを動作させるfrontendサービスを設定
   frontend:
     image: node:latest
+    working_dir: /work
     volumes:
       - ./frontend:/work
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
 
   # WEBサーバーを動作させるサービス（Nginx）を設定
   web:
