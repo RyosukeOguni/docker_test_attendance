@@ -94,11 +94,48 @@ SPA認証機能により、利用者が操作する打刻画面、管理者が�
 </details>
 
 ## ３．導入手順
+
+docker-composeの起動
+```
 docker-compose up -d --build
-docker-compose exec app bash
+```
+backendコンテナへアクセス
+```
+docker-compose exec backend bash
+```
+composerをインストール
+```
 composer install
-php artisan migrate --seed
+```
+アプリケーションキーを設定
+```
+php artisan key:generate
+```
+laravel.logを記録するディレクトリに書込権限を付与
+```
 chmod 777 -R storage/
-## ３．作成者情報
+```
+マイグレーションを実行
+```
+php artisan migrate --seed
+```
+frontendコンテナへアクセス
+```
+docker-compose exec frontend bash
+```
+npmをインストール
+```
+npm install
+```
+buildしてdistを作成
+```
+npm run dev-build
+```
+
+- [backend_API：http://localhost:8080/](http://localhost:8080/)
+- [frontend_SPA：http://localhost:8081/](http://localhost:8081/)
+- [phpmyadmin：http://localhost:8082/](http://localhost:8082/)
+
+## ４．作成者情報
 
 - 作成者：小国 亮介
