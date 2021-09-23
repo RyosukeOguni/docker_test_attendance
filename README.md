@@ -100,7 +100,7 @@ composer install
 ```
 ３.環境変数ファイルをコピーしてリネーム
 ```
-cp backend/.env.example backend/.env
+cp .env.example .env
 ```
 ４.アプリケーションキーを設定
 ```
