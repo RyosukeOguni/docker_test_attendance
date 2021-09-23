@@ -114,7 +114,7 @@ ___
 </details>
 
 <details>
-<summary><b>フロントエンド（Vue.js）の設定</b></summary>
+<summary><b>３.フロントエンド（Vue.js）の設定</b></summary>
 
 １.frontendコンテナへアクセス
 ```
