@@ -102,11 +102,15 @@ php artisan key:generate
 ```
 chmod 777 -R storage/
 ```
-６.マイグレーションを実行
+６.xlsxを生成するディレクトリに書込権限を付与
+```
+chmod 777 -R public/excel/
+```
+７.マイグレーションを実行
 ```
 php artisan migrate --seed
 ```
-７.docker-compose execの終了
+８.docker-compose execの終了
 ```
 exit
 ```
