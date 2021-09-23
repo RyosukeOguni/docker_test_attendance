@@ -73,7 +73,7 @@ ___
 
 １.Git hubからシステムをダウンロード
 ```
-git clone https://github.com/RyosukeOguni/attendance_systemgit
+git clone https://github.com/RyosukeOguni/attendance_system
 ```
 ２.ディレクトリを移動
 ```
