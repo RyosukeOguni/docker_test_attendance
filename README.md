@@ -57,14 +57,6 @@ ___
 #### 必要環境
 - docker
 - docker-compose
-#### Docker構成
-| コンテナ名 | image | URL |
-----|----|----
-| backend | php:8.0-fpm-buster | [http://localhost:8080/](http://localhost:8080/) |
-| frontend | node:latest | [http://localhost:8081/](http://localhost:8081/) |
-| phpmyadmin | phpmyadmin/phpmyadmin | [http://localhost:8082/](http://localhost:8082/) |
-| web | nginx:latest ||
-| db | mysql/mysql-server:8.0 ||
 
 #### システム導入手順
 <details>
@@ -138,6 +130,15 @@ npm run dev-build
 ```
 ___
 </details>
+
+#### Docker構成
+| コンテナ名 | image | URL |
+----|----|----
+| backend | php:8.0-fpm-buster | [http://localhost:8080/](http://localhost:8080/) |
+| frontend | node:latest | [http://localhost:8081/](http://localhost:8081/) |
+| phpmyadmin | phpmyadmin/phpmyadmin | [http://localhost:8082/](http://localhost:8082/) |
+| web | nginx:latest ||
+| db | mysql/mysql-server:8.0 ||
 
 ## ４．作成者情報
 
