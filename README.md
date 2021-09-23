@@ -122,7 +122,7 @@ npm install
 ```
 ３.環境変数ファイルをコピーしてリネーム
 ```
-cp frontend/.env.production frontend/.env.local
+cp .env.production .env.local
 ```
 ４.buildしてdistを作成
 ```
