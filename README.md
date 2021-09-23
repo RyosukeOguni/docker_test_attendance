@@ -60,7 +60,7 @@ ___
 
 #### システム導入手順
 <details>
-<summary><b>システムDLとDockerコンテナの起動</b></summary>
+<summary><b>１.システムDLとDockerコンテナの起動</b></summary>
 <br>
 
 １.Git hubからシステムをダウンロード
@@ -79,7 +79,7 @@ ___
 </details>
 
 <details>
-<summary><b>バックエンド（Laravel）の設定</b></summary>
+<summary><b>２.バックエンド（Laravel）の設定</b></summary>
 <br>
 
 １.backendコンテナへアクセス
@@ -106,6 +106,10 @@ chmod 777 -R storage/
 ```
 php artisan migrate --seed
 ```
+７.docker-compose execの終了
+```
+exit
+```
 ___
 </details>
 
@@ -127,6 +131,10 @@ cp .env.production .env.local
 ４.buildしてdistを作成
 ```
 npm run dev-build
+```
+５.docker-compose execの終了
+```
+exit
 ```
 ___
 </details>
