@@ -27,4 +27,4 @@ RUN install-php-extensions gd
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 # phpの実行をworkディレクトリ内に限定
-WORKDIR /var/www/html
+WORKDIR /backend
